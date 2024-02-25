@@ -1,6 +1,6 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../config/db.js";
-import User from "../user/user.model.js";
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/db.js");
+const User = require("../user/user.model.js");
 
 // 0 - To do,
 // 1 - Doing,
@@ -10,8 +10,8 @@ const Task = sequelize.define("Task", {
         type: DataTypes.INTEGER,
         references: {
             model: User,
-            key: 'id',
-        }
+            key: "id",
+        },
     },
     title: {
         type: DataTypes.STRING,
@@ -22,17 +22,17 @@ const Task = sequelize.define("Task", {
     },
     date: {
         type: DataTypes.DATEONLY,
-        defaultValue: DataTypes.DATE
+        defaultValue: DataTypes.DATE,
     },
     state: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
-    }
+    },
 });
 
-(async () => {
+async () => {
     await sequelize.sync();
-})
+};
 
-export default Task;
+module.exports = Task;

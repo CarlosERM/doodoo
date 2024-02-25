@@ -1,9 +1,11 @@
-import { CustomError } from "./custom_error.js";
-import { StatusCodes } from "http-status-codes";
+const CustomError = require("./custom_error.js");
+const { StatusCodes } = require("http-status-codes");
 
-export class Unaunthenticated extends CustomError {
+class Unaunthenticated extends CustomError {
     constructor(message) {
         super(message);
         this.status = StatusCodes.UNAUTHORIZED;
     }
 }
+
+module.exports = Unaunthenticated;

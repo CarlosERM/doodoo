@@ -1,11 +1,10 @@
-import "dotenv/config";
-import express from 'express';
-// import multer from 'multer';
-import { loginController, registerController } from './auth.controller.js';
-import passport from "passport";
-import { Strategy, ExtractJwt } from 'passport-jwt';
-import User from "../user/user.model.js";
-import multer from "multer";
+require("dotenv").config();
+const express = require("express");
+const { loginController, registerController } = require("./auth.controller.js");
+const passport = require("passport");
+const { Strategy, ExtractJwt } = require("passport-jwt");
+const User = require("../user/user.model.js");
+const multer = require("multer");
 
 const router = express.Router();
 const upload = multer({ dest: "./images/" });
@@ -17,40 +16,31 @@ const jwtOptions = {
 
 passport.use(
     new Strategy(jwtOptions, function (jwt_payload, cb) {
-        User.findOne(
-            {
-                where: {
-                    id: jwt_payload.id,
-                },
-            })
-        .catch(e => {
-            return done(err, false);
+        User.findOne({
+            where: {
+                id: jwt_payload.id,
+            },
         })
-        .then(user => {
+            .catch((e) => {
+                return done(err, false);
+            })
+            .then((user) => {
                 if (!user) {
                     return cb(null, false);
                 }
                 return cb(null, user);
-            }
-        );
+            });
     })
 );
 
 router.post("/register", upload.single("image"), registerController);
 router.post("/login", loginController);
-router
-    .get(
-        "/teste", 
-        passport.authenticate("jwt", { session: false }), 
-        (req, res) => {
-        res.json({ message: 'You are fuck to access this resource' 
-    });
-});
+router.get(
+    "/teste",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+        res.json({ message: "You are fuck to access this resource" });
+    }
+);
 
-// router.post("/login", passport.authenticate('local'));
-// router.post("/login", (req, res) => {
-//     console.log(req.body);
-//     res.json("entrou?");
-// });
-
-export default router;
+module.exports = router;

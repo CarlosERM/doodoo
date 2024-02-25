@@ -1,5 +1,7 @@
-import { StatusCodes } from "http-status-codes";
+const { StatusCodes } = require("http-status-codes");
 
-export const notFound = (req, res) => {
+const notFound = (req, res) => {
     res.status(StatusCodes.NOT_FOUND).send("This route doesn't exist.");
-}
+};
+
+module.exports = notFound;

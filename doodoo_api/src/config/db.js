@@ -1,7 +1,9 @@
-import Sequelize from 'sequelize'
-import 'colors'
+require("colors");
+const Sequelize = require("sequelize");
 
-export const sequelize = new Sequelize("doodoo-db", "postgres", "PASSWORD", {
+const sequelize = new Sequelize("doodoo-db", "postgres", "asshole", {
     host: "doodoo-db",
     dialect: "postgres",
 });
+
+module.exports = sequelize;
