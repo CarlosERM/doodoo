@@ -1,0 +1,24 @@
+/* .parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+.form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: var(--c10);
+  transform: translate(-50%, -50%);
+  padding: 2rem 2rem 2.625rem 2rem;
+  border-radius: 1rem;
+}
+
+.form_title {
+  font-size: 2rem;
+  font-weight: bold;
+}
