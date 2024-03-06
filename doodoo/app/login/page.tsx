@@ -1,16 +1,23 @@
 import Image from "next/image";
-import logo from "@/public/logo.svg";
-import github from "@/public/github_logo.svg";
-import linkedin from "@/public/linkedin.svg";
-import style from "./page.module.css";
-import { Input } from "../ui/input/input";
-import { Link } from "../ui/link/link";
-import { Button } from "../ui/button/button";
+import Input from "../ui/input";
+import Link from "next/link";
 
 export default function Login() {
   return (
     <>
-      <div className={style.login_wrapper}>
+      <div className="h-full flex justify-center content-center">
+        <form className="self-center bg-c10 rounded-2xl p-8">
+          <h2 className="text-3xl font-bold text-center mb-2">Login</h2>
+          <Input label="Email" type="email" />
+          <Input label="Password" type="password" />
+          <div className="text-end">
+            <Link className="text-sm font-medium" href="#">
+              Forgot Password
+            </Link>
+          </div>
+        </form>
+      </div>
+      {/* <div className={style.login_wrapper}>
         <Image className={style.logo} src={logo} alt="Doodoo logo" />
         <div className={style.form_wrapper}>
           <h2 className={style.form_title}>Login</h2>
@@ -42,7 +49,7 @@ export default function Login() {
         >
           <Image className={style.icon} src={linkedin} alt="Linkedin Icon" />
         </a>
-      </div>
+      </div> */}
     </>
   );
 }
