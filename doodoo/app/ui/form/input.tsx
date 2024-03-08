@@ -1,11 +1,21 @@
+"use client";
 export default function Input({
   label,
   placeholder,
   type,
+  name,
+  value,
+  className,
+  handleChange,
 }: {
   label: string;
   placeholder: string;
   type: string;
+  name?: string | undefined;
+  value: string;
+  className: string;
+
+  handleChange: (target: HTMLInputElement) => void;
 }) {
   return (
     <>
@@ -13,10 +23,12 @@ export default function Input({
         {label}
       </label>
       <input
-        className="p-2.5 rounded-lg bg-c2 mb-3 placeholder:text-c10"
+        className={`focus:outline-none focus:ring-c1 focus:ring-2 ${className} p-2.5 rounded-lg bg-c2 placeholder:text-c10 mb-3`}
         type={type}
-        name={type}
+        name={name ? name : type}
+        value={value}
         placeholder={placeholder}
+        onChange={(e) => handleChange(e.target)}
       />
     </>
   );

@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function SocialIcons() {
   return (
-    <div className="absolute bottom-2 flex gap-4">
+    <div className="fixed bottom-4 flex gap-4">
       <a
         className="flex align-center"
         href="https://github.com/CarlosERM"

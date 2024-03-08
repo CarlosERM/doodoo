@@ -4,8 +4,8 @@ import Image from "next/image";
 
 export default function Logo() {
   return (
-    <Link className="self-center w-56" href="/#">
-      <Image src={logo} alt="Doodoo logo" />
+    <Link className="self-center" href="/#">
+      <Image className="w-56 sm:w-64 my-6" src={logo} alt="Doodoo logo" />
     </Link>
   );
 }

@@ -6,19 +6,20 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors: {
-      c1: "#825ff6",
-      c2: "#222327",
-      c3: "#ffffff",
-      c4: "#a8a9aa",
-      c5: "#24262c",
-      c6: "#543f98",
-      c7: "#474950",
-      c8: "#1efe7f",
-      c9: "#2a2b2f",
-      c10: "#646464",
+    extend: {
+      colors: {
+        c1: "#825ff6",
+        c2: "#222327",
+        c3: "#ffffff",
+        c4: "#a8a9aa",
+        c5: "#24262c",
+        c6: "#543f98",
+        c7: "#474950",
+        c8: "#1efe7f",
+        c9: "#2a2b2f",
+        c10: "#646464",
+      },
     },
-    extend: {},
   },
   plugins: [],
 };
