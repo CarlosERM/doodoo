@@ -12,7 +12,6 @@ import {
   validatePassword2,
 } from "../lib/validation";
 import { useDebounce } from "../lib/useDebounce";
-
 interface RegisterFormData {
   name: string;
   email: string;
@@ -21,7 +20,7 @@ interface RegisterFormData {
 }
 
 export default function Register() {
-  const [loginData, setLoginData] = useState<RegisterFormData>({
+  const [registerData, setRegisterData] = useState<RegisterFormData>({
     name: "",
     email: "",
     password1: "",
@@ -42,7 +41,9 @@ export default function Register() {
 
   const handleChange = (target: HTMLInputElement) => {
     const { name, value } = target;
-    setLoginData({ ...loginData, [name]: value });
+    console.log([name], value);
+    setRegisterData({ ...registerData, [name]: value });
+    console.log(registerData);
 
     if (name === "name") {
       debouncedValidateName(value, (e: string) =>
@@ -63,37 +64,56 @@ export default function Register() {
     }
 
     if (name === "password2") {
-      console.log(loginData.password1, loginData.password2);
-      debouncedValidatePassword2(
-        loginData.password1,
-        loginData.password2,
-        (e: string) => setErrorsForm({ ...errorsForm, password2: e })
+      debouncedValidatePassword2(registerData.password1, value, (e: string) =>
+        setErrorsForm({ ...errorsForm, password2: e })
       );
     }
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    // e.preventDefault();
-    // if (loginData.email === "") {
-    //   console.log(loginData);
-    //   setErrorsForm({ ...errorsForm, email: "Email is empty" });
-    //   return;
-    // }
-    // if (loginData.password === "") {
-    //   console.log(loginData);
-    //   setErrorsForm({ ...errorsForm, password: "Email is empty" });
-    //   return;
-    // }
-    // if (
-    //   validateEmail(loginData.email, (e: string) =>
-    //     setErrorsForm({ ...errorsForm, email: e })
-    //   ) &&
-    //   validatePassword(loginData.password, (e: string) =>
-    //     setErrorsForm({ ...errorsForm, password: e })
-    //   )
-    // ) {
-    //   console.log("envia pra api");
-    // }
+    e.preventDefault();
+    if (registerData.name === "") {
+      console.log(registerData);
+      setErrorsForm({ ...errorsForm, name: "Name is empty" });
+      return;
+    }
+
+    if (registerData.email === "") {
+      console.log(registerData);
+      setErrorsForm({ ...errorsForm, email: "Email is empty" });
+      return;
+    }
+
+    if (registerData.password1 === "") {
+      console.log(registerData);
+      setErrorsForm({ ...errorsForm, password1: "Password is empty" });
+      return;
+    }
+
+    if (registerData.password2 === "") {
+      console.log(registerData);
+      setErrorsForm({ ...errorsForm, password2: "Password is empty" });
+      return;
+    }
+
+    if (
+      validateName(registerData.name, (e: string) =>
+        setErrorsForm({ ...errorsForm, name: e })
+      ) &&
+      validateEmail(registerData.email, (e: string) =>
+        setErrorsForm({ ...errorsForm, email: e })
+      ) &&
+      validatePassword(registerData.password1, (e: string) =>
+        setErrorsForm({ ...errorsForm, password1: e })
+      ) &&
+      validatePassword2(
+        registerData.password1,
+        registerData.password2,
+        (e: string) => setErrorsForm({ ...errorsForm, password2: e })
+      )
+    ) {
+      console.log("envia pra api");
+    }
   };
 
   return (
@@ -108,10 +128,10 @@ export default function Register() {
           <Input
             label="Name"
             type="name"
-            value={loginData.name}
+            value={registerData.name}
             placeholder="Ex: John Doe"
             className={
-              errorsForm.email &&
+              errorsForm.name &&
               "border border-red-500 focus:ring-1 focus:ring-red-500"
             }
             handleChange={handleChange}
@@ -122,7 +142,7 @@ export default function Register() {
           <Input
             label="Email"
             type="email"
-            value={loginData.email}
+            value={registerData.email}
             placeholder="Ex: john@gmail.com"
             className={
               errorsForm.email &&
@@ -137,7 +157,7 @@ export default function Register() {
             label="Password"
             type="password"
             name="password1"
-            value={loginData.password1}
+            value={registerData.password1}
             placeholder="Password"
             className={
               errorsForm.password1 &&
@@ -152,7 +172,7 @@ export default function Register() {
             label="Password"
             type="password"
             name="password2"
-            value={loginData.password2}
+            value={registerData.password2}
             placeholder="Password"
             className={
               errorsForm.password2 &&

@@ -46,9 +46,8 @@ export function validatePassword2(
     error("");
     return false;
   }
-
   if (password1 != password2) {
-    console.log(password1, password2);
+    // console.log(password1, password2);
     error("Passwords not equal");
     return false;
   } else {

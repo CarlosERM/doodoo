@@ -28,7 +28,7 @@ export default function Login() {
   const handleChange = (target: HTMLInputElement) => {
     const { name, value } = target;
     setLoginData({ ...loginData, [name]: value });
-
+    console.log(loginData);
     if (name === "email") {
       debouncedValidateEmail(value, (e: string) =>
         setErrorsForm({ ...errorsForm, email: e })
@@ -65,7 +65,7 @@ export default function Login() {
         setErrorsForm({ ...errorsForm, password: e })
       )
     ) {
-      console.log("envia pra api");
+      console.log("Envia pra api");
     }
   };
 
