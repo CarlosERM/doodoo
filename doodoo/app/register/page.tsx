@@ -12,6 +12,8 @@ import {
   validatePassword2,
 } from "../lib/validation";
 import { useDebounce } from "../lib/useDebounce";
+import Logo from "../ui/form/logo";
+
 interface RegisterFormData {
   name: string;
   email: string;
@@ -118,6 +120,7 @@ export default function Register() {
 
   return (
     <>
+      {/* <Logo /> */}
       <div className="h-full flex flex-col justify-center content-center p-4">
         <Form
           bottom="Already have an account?"
@@ -134,11 +137,9 @@ export default function Register() {
               errorsForm.name &&
               "border border-red-500 focus:ring-1 focus:ring-red-500"
             }
+            error={errorsForm.name}
             handleChange={handleChange}
           />
-          {errorsForm.name && (
-            <p className="text-red-500 text-sm mb-3">{errorsForm.name}</p>
-          )}
           <Input
             label="Email"
             type="email"
@@ -148,45 +149,41 @@ export default function Register() {
               errorsForm.email &&
               "border border-red-500 focus:ring-1 focus:ring-red-500"
             }
+            error={errorsForm.email}
             handleChange={handleChange}
           />
-          {errorsForm.email && (
-            <p className="text-red-500 text-sm mb-3">{errorsForm.email}</p>
-          )}
-          <Input
-            label="Password"
-            type="password"
-            name="password1"
-            value={registerData.password1}
-            placeholder="Password"
-            className={
-              errorsForm.password1 &&
-              "border border-red-500 focus:ring-1 focus:ring-red-500"
-            }
-            handleChange={handleChange}
-          />
-          {errorsForm.password1 && (
-            <p className="text-red-500 text-sm mb-3">{errorsForm.password1}</p>
-          )}
-          <Input
-            label="Password"
-            type="password"
-            name="password2"
-            value={registerData.password2}
-            placeholder="Password"
-            className={
-              errorsForm.password2 &&
-              "border border-red-500 focus:ring-1 focus:ring-red-500"
-            }
-            handleChange={handleChange}
-          />
-          {errorsForm.password2 && (
-            <p className="text-red-500 text-sm mb-3">{errorsForm.password2}</p>
-          )}
+          <div className="sm:flex gap-1">
+            <Input
+              label="Password"
+              type="password"
+              name="password1"
+              value={registerData.password1}
+              placeholder="Password"
+              className={
+                errorsForm.password1 &&
+                "border border-red-500 focus:ring-1 focus:ring-red-500"
+              }
+              error={errorsForm.password1}
+              handleChange={handleChange}
+            />
+            <Input
+              label="Password"
+              type="password"
+              name="password2"
+              value={registerData.password2}
+              placeholder="Password"
+              className={
+                errorsForm.password2 &&
+                "border border-red-500 focus:ring-1 focus:ring-red-500"
+              }
+              error={errorsForm.password2}
+              handleChange={handleChange}
+            />
+          </div>
           <div className="text-end">
             <LinkSimple name="Forgot Password" route="/reset-password" />
           </div>
-          <FormButton name="Login" />
+          <FormButton name="Register" />
         </Form>
       </div>
     </>

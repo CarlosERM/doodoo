@@ -10,7 +10,7 @@ export default function EyeOpen({
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-6 h-6 absolute bottom-5 right-3 cursor-pointer"
+      className="w-6 h-6 absolute bottom-8 right-3 cursor-pointer"
       onClick={handleToggle}
     >
       <path

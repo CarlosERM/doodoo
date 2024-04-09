@@ -19,8 +19,7 @@ export default function Form({
 }>) {
   return (
     <>
-      <div className="self-center container flex flex-col max-w-md">
-        <Logo />
+      <div className="self-center container flex flex-col p-5 sm:w-[30.375rem]">
         <form
           className=" bg-c9 rounded-2xl p-8 flex flex-col peer"
           onSubmit={handleSubmit}

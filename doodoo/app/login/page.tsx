@@ -87,25 +87,27 @@ export default function Login() {
               errorsForm.email &&
               "border border-red-500 focus:ring-1 focus:ring-red-500"
             }
+            error={errorsForm.email}
             handleChange={handleChange}
           />
-          {errorsForm.email && (
+          {/* {errorsForm.email && (
             <p className="text-red-500 text-sm mb-3">{errorsForm.email}</p>
-          )}
+          )} */}
           <Input
             label="Password"
             type="password"
             value={loginData.password}
             placeholder="Password"
+            error={errorsForm.password}
             className={
               errorsForm.password &&
               "border border-red-500 focus:ring-1 focus:ring-red-500"
             }
             handleChange={handleChange}
           />
-          {errorsForm.password && (
+          {/* {errorsForm.password && (
             <p className="text-red-500 text-sm mb-3">{errorsForm.password}</p>
-          )}
+          )} */}
           <div className="text-end">
             <LinkSimple name="Forgot Password" route="/reset-password" />
           </div>

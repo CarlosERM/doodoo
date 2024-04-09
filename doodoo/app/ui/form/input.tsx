@@ -10,6 +10,7 @@ export default function Input({
   name,
   value,
   className,
+  error,
   handleChange,
 }: {
   label: string;
@@ -18,6 +19,7 @@ export default function Input({
   name?: string | undefined;
   value: string;
   className: string;
+  error?: string | undefined;
   handleChange: (target: HTMLInputElement) => void;
 }) {
   const [see, setSee] = useState<boolean>(false);
@@ -31,7 +33,7 @@ export default function Input({
         {label}
       </label>
       <input
-        className={`focus:outline-none focus:ring-c1 focus:ring-2 ${className} p-2.5 rounded-lg bg-c2 placeholder:text-c10 mb-3`}
+        className={`focus:outline-none focus:ring-c1 focus:ring-2 ${className} p-2.5 rounded-lg bg-c2 placeholder:text-c10 mb-6 w-full`}
         type={see ? "text" : type}
         name={name ? name : type}
         value={value}
@@ -41,6 +43,11 @@ export default function Input({
       {see
         ? type === "password" && <EyeClosed handleToggle={handleToggle} />
         : type === "password" && <EyeOpen handleToggle={handleToggle} />}
+      {error && (
+        <p className="absolute text-red-500 text-sm mb-3 bottom-[-0.75rem]  left-0">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
