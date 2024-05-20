@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { StatusCodes } = require("http-status-codes");
 const asyncWrapper = require("../middlewares/async_wrapper.js");
 
@@ -6,7 +7,7 @@ const getUserProfile = asyncWrapper(async (req, res, next) => {
 
     res.status(StatusCodes.OK).json({
         name: user.name,
-        image: "http://localhost:3000/" + user.image_path,
+        image: `http://localhost:${process.env.DOODOO_PORT}/` + user.image_path,
     });
 });
 

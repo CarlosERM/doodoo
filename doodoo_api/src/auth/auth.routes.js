@@ -7,7 +7,20 @@ const User = require("../user/user.model.js");
 const multer = require("multer");
 
 const router = express.Router();
-const upload = multer({ dest: "./images/" });
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "./images/");
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+        cb(null, uniqueSuffix + file.originalname);
+    },
+});
+
+const upload = multer({ storage: storage });
+
+// const upload = multer({ dest: "" });
 
 const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -35,12 +48,5 @@ passport.use(
 
 router.post("/register", upload.single("image"), registerController);
 router.post("/login", loginController);
-router.get(
-    "/teste",
-    passport.authenticate("jwt", { session: false }),
-    (req, res) => {
-        res.json({ message: "You are fuck to access this resource" });
-    }
-);
 
 module.exports = router;
